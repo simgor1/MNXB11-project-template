@@ -1,15 +1,20 @@
-
 #include <iostream>
-int main(int argc, char *argv[]) {
-  std::cout << "I am just a code template, you need to implement the "
-               "functionality you want to use yourself!"
-            << std::endl;
+#include "argh.h"
 
-  std::cout << "We were passed " << argc
-            << " command line arguments, the first of which was " << argv[0]
-            << std::endl;
-  std::cout << "With a good CLI library, we could use the command line "
-               "arguments to make a useful program."
-            << std::endl;
+int main(int argc, char* argv[]) {
+  argh::parser cmdl(argc, argv);
+
+  cmdl({ "-h", "--help" }, "usage: ./main <input-csv-file>");
+
+ if (cmdl.size() > 1) {
+    // Check if at least one argument is provided (excluding the program name)
+    std::string inputFilePath = cmdl[1];
+    std::cout << "Reading CSV file: " << inputFilePath << std::endl;
+
+    // Open and read the CSV file (implement your CSV processing logic here)
+  } else {
+    std::cout << "Usage: ./main <input-file>" << std::endl;
+  }
+
   return 0;
 }
